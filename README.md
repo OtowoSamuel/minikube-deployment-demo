@@ -75,10 +75,12 @@ This is a **GitOps-driven Kubernetes project** featuring 3 microservices managed
 
 3. Access ArgoCD UI
    ```bash
-   kubectl port-forward svc/argocd-server -n argocd 8080:80
+   kubectl port-forward svc/argocd-server -n argocd 8080:443
    # Get password:
    kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 --decode
    ```
+   
+   **Note:** The official docs recommend using `8080:443` for HTTPS access. Access at `https://localhost:8080` (accept the self-signed certificate).
 
 4. Install NGINX Ingress Controller
    ```bash
@@ -367,14 +369,15 @@ kubectl port-forward svc/<service> -n <namespace> 8080:80
 # Get password
 kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 --decode
 
-# Access UI
-kubectl port-forward svc/argocd-server -n argocd 8080:80
+# Access UI (HTTPS)
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+# Then visit: https://localhost:8080
 
 # List apps
 kubectl get applications -n argocd
 
-# Sync manually
-kubectl argocd app sync <app-name>
+# Sync manually (if using CLI)
+argocd app sync <app-name>
 ```
 
 ---
@@ -414,6 +417,18 @@ By completing this project, you will understand:
 4. **Read error messages** - they teach you a lot
 5. **Experiment** - break things and fix them
 6. **Document your learnings** - add notes as you go
+
+## 📝 Important Notes
+
+### Kubernetes Ingress API
+As of 2026, Kubernetes recommends using **Gateway API** instead of Ingress for new projects. However, Ingress remains:
+- Generally available and stable
+- Subject to Kubernetes API stability guarantees  
+- Not being removed from Kubernetes
+- Widely used in production environments
+- The focus of this learning project
+
+The Ingress API is frozen (no new features) but is still the standard for most existing deployments.
 
 ---
 
