@@ -16,5 +16,8 @@ spec:
       containers:
         - name: token-app
           image: hashicorp/http-echo:latest
+          args:
+            - "-text=Hello from token-app!"
+            - "-listen=:8080"
           ports:
             - containerPort: 8080
