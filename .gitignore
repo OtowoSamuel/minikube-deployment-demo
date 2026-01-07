@@ -1,1 +1,6 @@
 minikube-linux-amd64
+
+# TLS certificates (mkcert generated)
+*.pem
+*.key
+*.crt
