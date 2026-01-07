@@ -5,6 +5,10 @@ metadata:
   namespace: payment-app
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - payment.apps.local
+      secretName: apps-local-tls
   rules:
     - host: payment.apps.local
       http:
