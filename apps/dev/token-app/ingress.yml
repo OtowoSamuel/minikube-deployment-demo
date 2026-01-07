@@ -5,6 +5,10 @@ metadata:
   namespace: token-app
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - token.apps.local
+      secretName: apps-local-tls
   rules:
     - host: token.apps.local
       http:

@@ -5,6 +5,10 @@ metadata:
   namespace: web-app
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - web.apps.local
+      secretName: apps-local-tls
   rules:
     - host: web.apps.local
       http:
